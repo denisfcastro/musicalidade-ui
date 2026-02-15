@@ -1,0 +1,151 @@
+:host {
+  --neon-cyan: #00f3ff;
+  --correct: #2ecc71;
+  --wrong: #e74c3c;
+  --bg-dark: #0f172a;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--bg-dark);
+  color: white;
+  font-family: 'Inter', sans-serif;
+  padding: 20px;
+}
+
+.title {
+  font-size: 2.5rem;
+  letter-spacing: 12px;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.subtitle {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.diamond-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+
+.diamond {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(45deg);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+}
+
+.diamond.side {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+
+.diamond.side:hover {
+  border-color: var(--neon-cyan);
+  background: rgba(0, 243, 255, 0.05);
+}
+
+.diamond.main {
+  width: 140px;
+  height: 140px;
+  border: 2px solid var(--neon-cyan);
+  background: rgba(0, 243, 255, 0.1);
+  box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+}
+
+.content {
+  transform: rotate(-45deg);
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+/* Escalas */
+.footer-section {
+  width: 100%;
+  max-width: 550px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.chromatic-box {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.box-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+small {
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.notes-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.note-chip {
+  font-size: 0.8rem;
+  opacity: 0.2;
+}
+
+.note-chip.active {
+  opacity: 1;
+  color: var(--neon-cyan);
+  font-weight: bold;
+}
+
+.toggle-btn {
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 2px 10px;
+  border-radius: 4px;
+  font-size: 0.6rem;
+  cursor: pointer;
+}
+
+.text-muted {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.2);
+  width: 100%;
+  text-align: center;
+}
+
+.correct-flash { animation: success 0.5s forwards; }
+.wrong-shake { animation: fail 0.4s forwards; }
+
+@keyframes success {
+  50% { background: var(--correct); }
+}
+
+@keyframes fail {
+  0%, 100% { transform: rotate(45deg) translateX(0); }
+  25% { transform: rotate(45deg) translateX(-8px); background: var(--wrong); }
+  75% { transform: rotate(45deg) translateX(8px); }
+}

@@ -1,0 +1,55 @@
+<div class="game-container">
+  <header class="simple-header">
+    <h1 class="title">MUSICALIDADE</h1>
+    <p class="subtitle">QUAL NOTA FAZ PARTE DA ESCALA DE <strong>{{ tomBase }} MAIOR</strong>?</p>
+  </header>
+
+  <div class="diamond-wrapper">
+    <div class="diamond side"
+         [ngClass]="{'correct-flash': statusResposta === 'correct' && opcaoEsquerda === respostaCorreta, 'wrong-shake': statusResposta === 'wrong' && opcaoEsquerda !== respostaCorreta}"
+         (click)="verificarResposta(opcaoEsquerda)">
+      <span class="content">{{ opcaoEsquerda }}</span>
+    </div>
+
+    <div class="diamond main">
+      <span class="content">{{ tomBase }}</span>
+    </div>
+
+    <div class="diamond side"
+         [ngClass]="{'correct-flash': statusResposta === 'correct' && opcaoDireita === respostaCorreta, 'wrong-shake': statusResposta === 'wrong' && opcaoDireita !== respostaCorreta}"
+         (click)="verificarResposta(opcaoDireita)">
+      <span class="content">{{ opcaoDireita }}</span>
+    </div>
+  </div>
+
+  <div class="footer-section">
+    <div class="chromatic-box">
+      <small>ORDEM DAS NOTAS</small>
+      <div class="notes-row static">
+        @for (nota of todasNotas; track nota) {
+        <span class="note-chip">{{ nota }}</span>
+        }
+      </div>
+    </div>
+
+    <div class="chromatic-box">
+      <div class="box-header">
+        <small>GABARITO: ESCALA DE {{ tomBase }}</small>
+        <button class="toggle-btn" (click)="mostrarGabarito = !mostrarGabarito">
+          {{ mostrarGabarito ? 'ESCONDER' : 'MOSTRAR' }}
+        </button>
+      </div>
+
+      <div class="notes-row blueprint" *ngIf="mostrarGabarito">
+        @for (nota of todasNotas; track nota) {
+        <span class="note-chip" [class.active]="escalaAtual.includes(nota)">
+            {{ nota }}
+          </span>
+        }
+      </div>
+      <div class="notes-row placeholder" *ngIf="!mostrarGabarito">
+        <span class="text-muted">Clique em mostrar para conferir as notas</span>
+      </div>
+    </div>
+  </div>
+</div>
