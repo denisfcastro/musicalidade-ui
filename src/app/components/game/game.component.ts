@@ -18,6 +18,8 @@ export class GameComponent implements OnInit {
   statusResposta: string = ''; // 'correct' ou 'wrong'
 
   todasNotas: string[] = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+  novasNotas: string[] = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+
 
   constructor(private musicaService: MusicaService) {}
 
@@ -26,7 +28,7 @@ export class GameComponent implements OnInit {
   }
 
   proximoDesafio() {
-    this.tomBase = this.todasNotas[Math.floor(Math.random() * this.todasNotas.length)];
+    this.tomBase = this.novasNotas[Math.floor(Math.random() * this.novasNotas.length)];
 
     this.musicaService.getEscalaMaior(this.tomBase).subscribe({
       next: (dados) => {
@@ -38,11 +40,10 @@ export class GameComponent implements OnInit {
   }
 
   gerarOpcoes() {
-    // Pega notas da escala (excluindo a tônica)
+
     const notasDaEscala = this.escalaAtual.filter(n => n !== this.tomBase);
     this.respostaCorreta = notasDaEscala[Math.floor(Math.random() * notasDaEscala.length)];
 
-    // Pega notas que NÃO estão na escala
     const notasErradas = this.todasNotas.filter(n => !this.escalaAtual.includes(n));
     const notaErrada = notasErradas[Math.floor(Math.random() * notasErradas.length)];
 
